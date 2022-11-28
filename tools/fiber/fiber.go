@@ -16,7 +16,7 @@ func Router() {
 
 func StartServer(port int) error {
 
-	app := fiber.New(fiber.Config{DisableStartupMessage: true})
+	app := fiber.New()
 
 	return app.Listen(fmt.Sprintf(":%d", port))
 }
