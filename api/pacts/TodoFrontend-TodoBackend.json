@@ -1,0 +1,59 @@
+{
+  "consumer": {
+    "name": "TodoFrontend"
+  },
+  "interactions": [
+    {
+      "description": "a request for create todo",
+      "providerState": "create todo",
+      "request": {
+        "body": {
+          "text": "buy some milk"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "$.body.text": {
+            "match": "type"
+          }
+        },
+        "method": "POST",
+        "path": "/todo"
+      },
+      "response": {
+        "body": {
+          "id": "1",
+          "text": "buy some milk"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "$.body.id": {
+            "match": "type"
+          },
+          "$.body.text": {
+            "match": "type"
+          }
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "10.2.2"
+    },
+    "pactRust": {
+      "ffi": "0.3.14",
+      "models": "1.0.0"
+    },
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  },
+  "provider": {
+    "name": "TodoBackend"
+  }
+}
