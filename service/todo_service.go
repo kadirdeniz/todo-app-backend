@@ -1,6 +1,7 @@
 package service
 
 import (
+	"github.com/google/uuid"
 	"todo/model"
 	"todo/repository"
 )
@@ -19,10 +20,12 @@ func NewTodoService(repository repository.ITodoRepository) ITodoService {
 }
 
 func (s *TodoService) CreateTodo(todo string) model.Todo {
+	todoObj := model.Todo{
+		ID:   uuid.New().String(),
+		Text: todo,
+	}
 	return s.repository.CreateTodo(
-		model.Todo{
-			Text: todo,
-			ID:   "123",
-		},
+		&repository.TodoList,
+		todoObj,
 	)
 }

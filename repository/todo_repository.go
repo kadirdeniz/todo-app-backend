@@ -4,7 +4,7 @@ import (
 	"todo/model"
 )
 
-var todoList []model.Todo
+var TodoList []model.Todo
 
 //go:generate mockgen -source=todo_repository.go -destination=../mock/mock_repository.go -package=mock
 type ITodoRepository interface {
