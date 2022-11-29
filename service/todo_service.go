@@ -12,10 +12,10 @@ type ITodoService interface {
 }
 
 type TodoService struct {
-	repository repository.TodoRepository
+	repository repository.ITodoRepository
 }
 
-func NewTodoService(repository repository.TodoRepository) ITodoService {
+func NewTodoService(repository repository.ITodoRepository) ITodoService {
 	return &TodoService{repository: repository}
 }
 

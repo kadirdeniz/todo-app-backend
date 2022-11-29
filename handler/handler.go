@@ -5,6 +5,10 @@ import (
 	"todo/service"
 )
 
+type CreatTodoRequest struct {
+	Text string `json:"text"`
+}
+
 type ITodoHandler interface {
 	CreateTodo(ctx *fiber.Ctx) error
 }
@@ -18,6 +22,10 @@ func NewTodoHandler(service service.ITodoService) ITodoHandler {
 }
 
 func (h *TodoHandler) CreateTodo(ctx *fiber.Ctx) error {
-	todo := ctx.FormValue("todo")
-	return ctx.JSON(h.service.CreateTodo(todo))
+	request := CreatTodoRequest{}
+	if err := ctx.BodyParser(&request); err != nil {
+		return err
+	}
+
+	return ctx.Status(200).JSON(h.service.CreateTodo(request.Text))
 }

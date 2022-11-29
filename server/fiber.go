@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"log"
+	"todo/handler"
+	"todo/repository"
+	"todo/service"
 )
 
 func Router() {
@@ -17,6 +20,14 @@ func Router() {
 func StartServer(port int) error {
 
 	app := fiber.New()
+
+	handler := handler.NewTodoHandler(
+		service.NewTodoService(
+			repository.NewTodoRepository(),
+		),
+	)
+
+	app.Post("/todo", handler.CreateTodo)
 
 	return app.Listen(fmt.Sprintf(":%d", port))
 }
