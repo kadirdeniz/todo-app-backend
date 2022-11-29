@@ -1,2 +1,5 @@
 run:
-	go run cmd/todo/main.go
+	go run main.go
+
+gomock:
+	go generate ./...

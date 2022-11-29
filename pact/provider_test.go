@@ -1,4 +1,4 @@
-package contract
+package pact
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"github.com/pact-foundation/pact-go/types"
 	"github.com/pact-foundation/pact-go/utils"
 	"testing"
-	"todo/tools/fiber"
+	"todo/server"
 )
 
 type Settings struct {
@@ -33,7 +33,7 @@ func (s *Settings) create() {
 
 func TestProvider(t *testing.T) {
 	port, _ := utils.GetFreePort()
-	go fiber.StartServer(port)
+	go server.StartServer(port)
 
 	settings := Settings{}
 	settings.create()
@@ -52,7 +52,7 @@ func TestProvider(t *testing.T) {
 		BrokerURL:                  settings.BrokerBaseURL,
 		BrokerPassword:             settings.BrokerPassword,
 		Tags:                       []string{settings.ConsumerTag},
-		PactURLs:                   []string{"./../../api/pacts/TodoFrontend-TodoBackend.json"},
+		PactURLs:                   []string{"./TodoFrontend-TodoBackend.json"},
 		PublishVerificationResults: true,
 		FailIfNoPactsFound:         true,
 	}
