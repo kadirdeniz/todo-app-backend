@@ -1,7 +1,6 @@
 package service
 
 import (
-	"math/rand"
 	"todo/model"
 	"todo/repository"
 )
@@ -20,8 +19,10 @@ func NewTodoService(repository repository.ITodoRepository) ITodoService {
 }
 
 func (s *TodoService) CreateTodo(todo string) model.Todo {
-	return model.Todo{
-		ID:   string(rand.Intn(100)),
-		Text: todo,
-	}
+	return s.repository.CreateTodo(
+		model.Todo{
+			Text: todo,
+			ID:   "123",
+		},
+	)
 }
