@@ -27,7 +27,7 @@ func StartServer(port int) error {
 		),
 	)
 
-	app.Post("/todo", handler.CreateTodo)
+	app.Post("/todos", handler.CreateTodo)
 
 	return app.Listen(fmt.Sprintf(":%d", port))
 }

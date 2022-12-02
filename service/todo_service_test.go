@@ -22,7 +22,7 @@ func TestService_CreateTodo(t *testing.T) {
 		EXPECT().
 		CreateTodo(
 			gomock.Any(),
-			todoObj,
+			gomock.Any(),
 		).
 		Return(todoObj).
 		Times(1)
