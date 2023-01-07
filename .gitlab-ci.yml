@@ -5,7 +5,7 @@ stages:
   - can_i_deploy
   - deploy2production
 
-# pact can i deploy to production
+# pact can i deploy to prod
 pact test:
   stage: can_i_deploy
   image:
@@ -15,7 +15,7 @@ pact test:
     PACT_BROKER_CHECK_FOR_POTENTIAL_DUPLICATE_PACTICIPANT_NAMES: "false"
   script:
       - pact-broker can-i-deploy \
-        --pacticipant "Todo Backend" \
+        --pacticipant Todo_Backend \
         --version $CI_COMMIT_REF_SLUG \
         --to production \
         --broker-base-url $PACT_FLOW_BASE_URL  \
