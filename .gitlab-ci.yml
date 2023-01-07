@@ -9,11 +9,7 @@ test:
   stage: test
   image: golang:1.18-alpine
   script:
-    - apk add --no-cache curl
-    - apk add --no-cache bash
-    - curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash
-    - export PATH=$PATH:/opt/pact/bin
-    - go get github.com/pact-foundation/pact-go@v1 
+    - curl -O -L https://npmjs.org/install.sh
     - CGO_ENABLED=0 go test ./...
 
 #dockerize and push to gitlab registry
