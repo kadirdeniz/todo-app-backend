@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/gofiber/fiber/v2 v2.40.1
 	github.com/golang/mock v1.3.1
+	github.com/google/uuid v1.3.0
 	github.com/pact-foundation/pact-go v1.7.0
 	github.com/stretchr/testify v1.7.4
 )
@@ -12,7 +13,6 @@ require (
 require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/google/uuid v1.3.0 // indirect
 	github.com/hashicorp/go-version v1.5.0 // indirect
 	github.com/hashicorp/logutils v1.0.0 // indirect
 	github.com/klauspost/compress v1.15.9 // indirect
