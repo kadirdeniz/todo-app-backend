@@ -9,9 +9,7 @@ test:
   stage: test
   image: golang:1.18-alpine
   script:
-    - apk add --no-cache curl
-    - curl -L http://www.npmjs.org/install.sh | sh
-    - npm install @pact-foundation/pact-provider-verifier -g
+    - go install github.com/pact-foundation/pact-go/cmd/pact-provider-verifier@latest
     - CGO_ENABLED=0 go test ./...
 
 #dockerize and push to gitlab registry
