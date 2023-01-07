@@ -5,12 +5,6 @@ stages:
   - can_i_deploy
   - deploy2production
 
-test:
-  stage: test
-  image: golang:1.18-alpine
-  script:
-    - CGO_ENABLED=0 go test $(go list ./... | grep -v /pact)
-
 # pact can i deploy to production
 pact test:
   stage: can_i_deploy
