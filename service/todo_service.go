@@ -24,8 +24,10 @@ func (s *TodoService) CreateTodo(todo string) model.Todo {
 		ID:   uuid.New().String(),
 		Text: todo,
 	}
-	return s.repository.CreateTodo(
+	s.repository.CreateTodo(
 		&repository.TodoList,
 		todoObj,
 	)
+
+	return todoObj
 }

@@ -30,5 +30,5 @@ func TestService_CreateTodo(t *testing.T) {
 	service := NewTodoService(mockRepository)
 	todo := service.CreateTodo("buy some milk")
 
-	assert.Equal(t, todoObj, todo)
+	assert.Equal(t, todoObj.Text, todo.Text)
 }
