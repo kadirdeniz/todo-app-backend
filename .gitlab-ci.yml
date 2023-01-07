@@ -45,8 +45,8 @@ pact test:
   image:
     name: pactfoundation/pact-cli:latest
     entrypoint: [ "" ]
-    variables:
-      PACT_BROKER_CHECK_FOR_POTENTIAL_DUPLICATE_PACTICIPANT_NAMES: "false"
+  variables:
+    PACT_BROKER_CHECK_FOR_POTENTIAL_DUPLICATE_PACTICIPANT_NAMES: "false"
   script:
       - pact-broker can-i-deploy \
         --pacticipant "Todo Backend" \
