@@ -1,7 +1,14 @@
 stages:
+  - test
   - dockerize
   - deploy2test
   - deploy2production
+
+test:
+  stage: test
+  image: golang:1.18-alpine
+  script:
+      - make tests
 
 #dockerize and push to gitlab registry
 dockerize:
