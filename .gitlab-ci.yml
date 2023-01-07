@@ -1,0 +1,48 @@
+stages:
+  - dockerize
+  - deploy2test
+  - deploy2production
+
+#dockerize and push to gitlab registry
+dockerize:
+  stage: dockerize
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+
+# deploy to heroku test environment
+deploy to test:
+  stage: deploy2test
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    # - docker exec -it $CI_REGISTRY_IMAGE bash echo $PROD_ENV_VARIABLES | base64 --decode > .env
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG registry.heroku.com/$HEROKU_APP_NAME-test/web
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - docker push registry.heroku.com/$HEROKU_APP_NAME-test/web
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web -a $HEROKU_APP_NAME-test
+
+# deploy to heroku production environment
+deploy to production:
+  stage: deploy2production
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    # - docker exec -it $CI_REGISTRY_IMAGE bash echo $PROD_ENV_VARIABLES | base64 --decode > .env
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG registry.heroku.com/$HEROKU_APP_NAME-prod/web
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - docker push registry.heroku.com/$HEROKU_APP_NAME-prod/web
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web -a $HEROKU_APP_NAME-prod
