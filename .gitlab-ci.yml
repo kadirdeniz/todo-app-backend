@@ -9,6 +9,7 @@ test:
   stage: test
   image: golang:1.18-alpine
   script:
+    - apk add --no-cache curl bash
     - cd /opt
     - curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash
     - export PATH=$PATH:/opt/pact/bin
