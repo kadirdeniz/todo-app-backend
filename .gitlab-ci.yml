@@ -2,7 +2,7 @@ stages:
   - test
   - dockerize
   - deploy2test
-  - pact_test
+  - can_i_deploy
   - deploy2production
 
 test:
@@ -39,12 +39,21 @@ deploy to test:
     - docker push registry.heroku.com/$HEROKU_APP_NAME-test/web
     - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web -a $HEROKU_APP_NAME-test
 
-# run pact tests
+# pact can i deploy to production
 pact test:
-  stage: pact_test
-  image: golang:1.18-alpine
+  stage: can_i_deploy
+  image:
+    name: pactfoundation/pact-cli:latest
+    entrypoint: [ "" ]
+    variables:
+      PACT_BROKER_CHECK_FOR_POTENTIAL_DUPLICATE_PACTICIPANT_NAMES: "false"
   script:
-    - CGO_ENABLED=0 go test -v ./pact/...
+      - pact-broker can-i-deploy \
+        --pacticipant "Todo Backend" \
+        --version $CI_COMMIT_REF_SLUG \
+        --to production \
+        --broker-base-url $PACT_FLOW_BASE_URL  \
+        --broker-token $PACT_FLOW_API_KEY
 
 # deploy to heroku production environment
 deploy to production:
