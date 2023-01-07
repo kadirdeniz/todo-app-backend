@@ -2,6 +2,7 @@ stages:
   - test
   - dockerize
   - deploy2test
+  - pact_test
   - deploy2production
 
 test:
@@ -37,6 +38,13 @@ deploy to test:
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
     - docker push registry.heroku.com/$HEROKU_APP_NAME-test/web
     - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web -a $HEROKU_APP_NAME-test
+
+# run pact tests
+pact test:
+  stage: pact_test
+  image: golang:1.18-alpine
+  script:
+    - CGO_ENABLED=0 go test -v ./pact/...
 
 # deploy to heroku production environment
 deploy to production:
