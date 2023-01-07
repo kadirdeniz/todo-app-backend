@@ -14,7 +14,7 @@ test:
     - curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash
     - export PATH=$PATH:/opt/pact/bin
     - go install github.com/pact-foundation/pact-go@v1
-    - CGO_ENABLED=0 go test ./...
+    - go test ./...
 
 #dockerize and push to gitlab registry
 dockerize:
