@@ -15,8 +15,9 @@ pact test:
     PACT_BROKER_CHECK_FOR_POTENTIAL_DUPLICATE_PACTICIPANT_NAMES: "false"
   script:
       - pact-broker can-i-deploy 
-        --version $CI_COMMIT_REF_SLUG 
-        --to prod
+        --pacticipant TodoFrontend
+        --version 1.0.0
+        --to-environment production
         --broker-base-url=$PACT_FLOW_BASE_URL
         --broker-token=$PACT_FLOW_API_KEY
 
