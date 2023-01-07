@@ -2,11 +2,13 @@ package pact
 
 import (
 	"fmt"
+	"os"
+	"testing"
+	"todo/server"
+
 	"github.com/pact-foundation/pact-go/dsl"
 	"github.com/pact-foundation/pact-go/types"
 	"github.com/pact-foundation/pact-go/utils"
-	"testing"
-	"todo/server"
 )
 
 type Settings struct {
@@ -14,7 +16,7 @@ type Settings struct {
 	ProviderName    string
 	BrokerBaseURL   string
 	BrokerUsername  string // Basic authentication
-	BrokerPassword  string // Basic authentication
+	BrokerToken  string // Basic authentication
 	ConsumerName    string
 	ConsumerVersion string // a git sha, semantic version number
 	ConsumerTag     string // dev, staging, prod
@@ -23,12 +25,14 @@ type Settings struct {
 
 func (s *Settings) create() {
 	s.Host = "127.0.0.1"
-	s.ProviderName = "CampaignService"
-	s.ConsumerName = "TodoBackend"
-	//s.BrokerBaseURL = "http://localhost"
+	s.ProviderName = "TodoBackend"
+	s.ConsumerName = "TodoFrontend"
+	s.BrokerBaseURL = os.Getenv("PACT_FLOW_BASE_URL")
 	s.ConsumerTag = "main"
 	s.ProviderVersion = "1.0.0"
 	s.ConsumerVersion = "1.0.0"
+	s.BrokerUsername = os.Getenv("PACT_FLOW_USERNAME")
+	s.BrokerToken = os.Getenv("PACT_FLOW_API_KEY")
 }
 
 func TestProvider(t *testing.T) {
@@ -48,13 +52,13 @@ func TestProvider(t *testing.T) {
 	verifyRequest := types.VerifyRequest{
 		ProviderBaseURL: fmt.Sprintf("http://%s:%d", settings.Host, port),
 		ProviderVersion: settings.ProviderVersion,
-		//BrokerUsername:             settings.BrokerUsername,
-		//BrokerURL:                  settings.BrokerBaseURL,
-		//BrokerPassword:             settings.BrokerPassword,
 		Tags:                       []string{settings.ConsumerTag},
-		PactURLs:                   []string{"./TodoFrontend-TodoBackend.json"},
-		PublishVerificationResults: false,
+		PactURLs:                   []string{"https://kadirdenz.pactflow.io/pacts/provider/TodoBackend/consumer/TodoFrontend/version/1.0.0"},
+		PublishVerificationResults: true,
 		FailIfNoPactsFound:         true,
+		BrokerURL:                  settings.BrokerBaseURL,
+		BrokerUsername:             settings.BrokerUsername,
+		BrokerToken: 			  settings.BrokerToken,
 	}
 
 	verifyResponses, err := pact.VerifyProvider(t, verifyRequest)
