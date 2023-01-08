@@ -9,11 +9,8 @@ stages:
 test:
   stage: test
   image: golang:1.18
-  services:
-    - docker:dind
-    #install ruby gems
   before_script:
-    - apt-get install -y ruby ruby-dev build-essential
+    - apt-get install ruby-dev
   script:
     - CGO_ENABLED=0 go test -v ./...
 
