@@ -11,8 +11,9 @@ test:
   image: golang:1.18
   before_script:
     - apt-get update
-    - apt-get install ruby-full
+    - apt-get install ruby-full -y
   script:
+    - gem install pact-provider-verifier
     - CGO_ENABLED=0 go test -v ./...
 
 #dockerize and push to gitlab registry
