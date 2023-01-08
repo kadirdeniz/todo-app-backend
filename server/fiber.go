@@ -10,6 +10,7 @@ import (
 	"todo/service"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func Router() {
@@ -28,6 +29,8 @@ func Router() {
 func StartServer(port int) error {
 
 	app := fiber.New()
+
+	app.Use(cors.New())
 
 	handler := handler.NewTodoHandler(
 		service.NewTodoService(
