@@ -10,7 +10,8 @@ test:
   stage: test
   image: golang:1.18
   before_script:
-    - apt-get install ruby-dev
+    - apt-get update
+    - apt-get install ruby-full
   script:
     - CGO_ENABLED=0 go test -v ./...
 
