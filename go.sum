@@ -181,6 +181,8 @@ github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn
 github.com/opentracing/opentracing-go v1.1.0/go.mod h1:UkNAQd3GIcIGf0SeVgPpRdFStlNbqXla1AfSYxPUl2o=
 github.com/pact-foundation/pact-go v1.7.0 h1:5iyVyg+avkWz9Jn7cefRmlPbXu+KMZvWblIe15v4fc8=
 github.com/pact-foundation/pact-go v1.7.0/go.mod h1:NcAbRqIE0cjRF+JKl2vcLlzjvrgcZrnq4SwQu2o4PeA=
+github.com/pact-foundation/pact-provider-verifier v1.36.1 h1:C9JkeU5qMC0AotPj2xspnNBmeDHUmp5JAM27sw2Ubtk=
+github.com/pact-foundation/pact-provider-verifier v1.36.1/go.mod h1:SusGrGJSIKQwjRvuFBx5GjVqqyoRUozoMOSfMXapeN0=
 github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=
 github.com/pelletier/go-toml v1.2.0/go.mod h1:5z9KED0ma1S8pY6P1sdut58dfprrGBbd/94hg7ilaic=
 github.com/pkg/errors v0.8.0/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=

@@ -8,8 +8,14 @@ stages:
 
 test:
   stage: test
-  image: golang:1.18-alpine
+  image: golang:1.18
+  services:
+    - docker:dind
+    #install ruby gems
+  before_script:
+    - apt-get install -y ruby ruby-dev build-essential
   script:
+    - go test -v ./...
     - CGO_ENABLED=0 go test $(go list ./... | grep -v /pact)
 
 #dockerize and push to gitlab registry
@@ -49,7 +55,7 @@ verify_pact:
   variables:
     PACT_BROKER_CHECK_FOR_POTENTIAL_DUPLICATE_PACTICIPANT_NAMES: "false"
   script:
-    - pact-broker verify \
+    -  verify \
       --provider-base-url https://$HEROKU_APP_NAME-test.herokuapp.com \
       --provider TodoBackend \
       --pacticipant TodoBackend \
