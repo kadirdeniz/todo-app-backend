@@ -6,43 +6,43 @@ stages:
   - can_i_deploy
   - deploy2production
 
-# test:
-#   stage: test
-#   image: golang:1.18
-#   before_script:
-#     - apt-get update
-#     - apt-get install ruby-full -y
-#   script:
-#     - gem install pact-provider-verifier
-#     - CGO_ENABLED=0 go test -v ./...
+test:
+  stage: test
+  image: golang:1.18
+  before_script:
+    - apt-get update
+    - apt-get install ruby-full -y
+  script:
+    - gem install pact-provider-verifier
+    - CGO_ENABLED=0 go test -v ./...
 
-# #dockerize and push to gitlab registry
-# dockerize:
-#   stage: dockerize
-#   image: docker:latest
-#   services:
-#     - docker:dind
-#   before_script:
-#     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-#   script:
-#     - docker build --platform linux/amd64 -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG .
-#     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+#dockerize and push to gitlab registry
+dockerize:
+  stage: dockerize
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+  script:
+    - docker build --platform linux/amd64 -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
 
-# # deploy to heroku test environment
-# deploy to test:
-#   stage: deploy2test
-#   image: docker:latest
-#   services:
-#     - docker:dind
-#   before_script:
-#     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-#   script:
-#     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-#     # - docker exec -it $CI_REGISTRY_IMAGE bash echo $PROD_ENV_VARIABLES | base64 --decode > .env
-#     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG registry.heroku.com/$HEROKU_APP_NAME-test/web
-#     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-#     - docker push registry.heroku.com/$HEROKU_APP_NAME-test/web
-#     - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web -a $HEROKU_APP_NAME-test
+# deploy to heroku test environment
+deploy to test:
+  stage: deploy2test
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    # - docker exec -it $CI_REGISTRY_IMAGE bash echo $PROD_ENV_VARIABLES | base64 --decode > .env
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG registry.heroku.com/$HEROKU_APP_NAME-test/web
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - docker push registry.heroku.com/$HEROKU_APP_NAME-test/web
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web -a $HEROKU_APP_NAME-test
 
 
 # pact can i deploy to prod
@@ -55,9 +55,9 @@ can_i_deploy:
     PACT_BROKER_CHECK_FOR_POTENTIAL_DUPLICATE_PACTICIPANT_NAMES: "false"
   script:
       - pact-broker can-i-deploy 
-        --pacticipant TodoFrontend
-        --version 1.0.0
-        --to-environment production
+        --pacticipant=TodoFrontend --version=1.0.0
+        --pacticipant=TodoBackend --version=1.0.0
+        --to-environment=production
         --broker-base-url=$PACT_FLOW_BASE_URL
         --broker-token=$PACT_FLOW_API_KEY
 
