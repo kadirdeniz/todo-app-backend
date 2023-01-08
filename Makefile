@@ -11,7 +11,7 @@ docker-run:
 	docker run -p 8000:8000 todo-app-backend
 
 tests:
-	go test ./...
+	go test $(go list ./... | grep -v /pact)
 
 pact_test:
 	go test -v ./pact/...

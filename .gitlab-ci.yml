@@ -2,6 +2,7 @@ stages:
   - test
   - dockerize
   - deploy2test
+  - verify_pact
   - can_i_deploy
   - deploy2production
 
@@ -9,15 +10,7 @@ test:
   stage: test
   image: golang:1.18-alpine
   script:
-    # set base path to main_path environment variable
-    - main_path=$PWD
-    - apk add --no-cache curl bash
-    - cd /opt
-    - curl -fsSL https://raw.githubusercontent.com/pact-foundation/pact-ruby-standalone/master/install.sh | bash
-    - export PATH=$PATH:/opt/pact/bin
-    - go install github.com/pact-foundation/pact-go@v1
-    - cd $main_path
-    - CGO_ENABLED=0 go test ./...
+    - CGO_ENABLED=0 go test go test $(go list ./... | grep -v /pact)
 
 #dockerize and push to gitlab registry
 dockerize:
@@ -46,6 +39,25 @@ deploy to test:
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
     - docker push registry.heroku.com/$HEROKU_APP_NAME-test/web
     - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web -a $HEROKU_APP_NAME-test
+
+# verify pacts
+verify_pact:
+  stage: verify_pact
+  image:
+    name: pactfoundation/pact-cli:latest
+    entrypoint: [ "" ]
+  variables:
+    PACT_BROKER_CHECK_FOR_POTENTIAL_DUPLICATE_PACTICIPANT_NAMES: "false"
+  script:
+    - pact-broker verify \
+      --provider-base-url https://$HEROKU_APP_NAME-test.herokuapp.com \
+      --provider TodoBackend \
+      --pacticipant TodoBackend \
+      --broker-base-url $PACT_BROKER_URL \
+      --broker-username $PACT_BROKER_USERNAME \
+      --broker-password $PACT_BROKER_PASSWORD \
+      --provider-app-version 1.0.0 \
+      --provider-tags main
 
 # pact can i deploy to prod
 can_i_deploy:
