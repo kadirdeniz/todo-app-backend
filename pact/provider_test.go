@@ -64,6 +64,8 @@ func TestProvider(t *testing.T) {
 	verifyResponses, err := pact.VerifyProvider(t, verifyRequest)
 	if err != nil {
 		fmt.Println("Error on VerifyProvider: ", err)
+		data, _ := os.ReadFile("/log/pact.log")
+		fmt.Println(string(data))
 		t.Fatal(err)
 	}
 

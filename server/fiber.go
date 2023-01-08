@@ -3,6 +3,8 @@ package server
 import (
 	"fmt"
 	"log"
+	"os"
+	"strconv"
 	"todo/handler"
 	"todo/repository"
 	"todo/service"
@@ -11,7 +13,12 @@ import (
 )
 
 func Router() {
-	err := StartServer(8000)
+	port, err := strconv.Atoi(os.Getenv("PORT"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = StartServer(port)
 	if err != nil {
 		log.Fatal(err)
 	}
