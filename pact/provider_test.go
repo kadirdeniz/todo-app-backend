@@ -50,9 +50,9 @@ func TestProvider(t *testing.T) {
 	}
 
 	verifyRequest := types.VerifyRequest{
-		ProviderBaseURL: fmt.Sprintf("http://%s:%d", settings.Host, port),
-		ProviderVersion: settings.ProviderVersion,
-		//Tags:                       []string{settings.ConsumerTag},
+		ProviderBaseURL:            fmt.Sprintf("http://%s:%d", settings.Host, port),
+		ProviderVersion:            settings.ProviderVersion,
+		Tags:                       []string{settings.ConsumerTag},
 		PactURLs:                   []string{"https://kadirdenz.pactflow.io/pacts/provider/TodoBackend/consumer/TodoFrontend/version/1.0.0"},
 		PublishVerificationResults: true,
 		FailIfNoPactsFound:         true,
@@ -64,8 +64,6 @@ func TestProvider(t *testing.T) {
 	verifyResponses, err := pact.VerifyProvider(t, verifyRequest)
 	if err != nil {
 		fmt.Println("Error on VerifyProvider: ", err)
-		data, _ := os.ReadFile("/log/pact.log")
-		fmt.Println(string(data))
 		t.Fatal(err)
 	}
 

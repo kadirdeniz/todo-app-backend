@@ -9,3 +9,13 @@ I, [2023-01-08T21:17:00.473286 #25009]  INFO -- : Sending POST request to path: 
 D, [2023-01-08T21:17:00.473334 #25009] DEBUG -- : body :{"text":"buy some milk"}
 I, [2023-01-08T21:17:00.476656 #25009]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"68", "Content-Type"=>"application/json", "Date"=>"Sun, 08 Jan 2023 18:17:00 GMT"}, see debug logs for body
 D, [2023-01-08T21:17:00.476713 #25009] DEBUG -- : body: {"id":"0ed1341c-32d6-4c45-ad2a-59a6c45a4f2b","text":"buy some milk"}
+I, [2023-01-08T21:46:23.054958 #28765]  INFO -- : Running example 'Verifying a pact between TodoFrontend and TodoBackend Given create todo a request for create todo with POST /todos returns a response which has status code 200'
+I, [2023-01-08T21:46:23.055893 #28765]  INFO -- : Sending POST request to path: "/todos" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type", "X_PACT_PROVIDER_STATES"=>[{"name"=>"create todo"}]}, see debug logs for body
+D, [2023-01-08T21:46:23.055936 #28765] DEBUG -- : body :{"text":"buy some milk"}
+I, [2023-01-08T21:46:23.068487 #28765]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"68", "Content-Type"=>"application/json", "Date"=>"Sun, 08 Jan 2023 18:46:23 GMT"}, see debug logs for body
+D, [2023-01-08T21:46:23.068525 #28765] DEBUG -- : body: {"id":"3a73b267-e38f-41f3-baf2-d2faf7f48fdd","text":"buy some milk"}
+I, [2023-01-08T21:46:26.275185 #28765]  INFO -- : Running example 'Verifying a pact between TodoFrontend and TodoBackend Given create todo a request for create todo with POST /todos returns a response which has status code 200'
+I, [2023-01-08T21:46:26.275449 #28765]  INFO -- : Sending POST request to path: "/todos" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type", "X_PACT_PROVIDER_STATES"=>[{"name"=>"create todo"}]}, see debug logs for body
+D, [2023-01-08T21:46:26.275504 #28765] DEBUG -- : body :{"text":"buy some milk"}
+I, [2023-01-08T21:46:26.279011 #28765]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"68", "Content-Type"=>"application/json", "Date"=>"Sun, 08 Jan 2023 18:46:26 GMT"}, see debug logs for body
+D, [2023-01-08T21:46:26.279065 #28765] DEBUG -- : body: {"id":"a7d0bbba-6477-4135-a071-4c6156326b80","text":"buy some milk"}
