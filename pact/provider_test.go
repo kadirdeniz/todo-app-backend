@@ -16,7 +16,7 @@ type Settings struct {
 	ProviderName    string
 	BrokerBaseURL   string
 	BrokerUsername  string // Basic authentication
-	BrokerToken  string // Basic authentication
+	BrokerToken     string // Basic authentication
 	ConsumerName    string
 	ConsumerVersion string // a git sha, semantic version number
 	ConsumerTag     string // dev, staging, prod
@@ -52,13 +52,13 @@ func TestProvider(t *testing.T) {
 	verifyRequest := types.VerifyRequest{
 		ProviderBaseURL: fmt.Sprintf("http://%s:%d", settings.Host, port),
 		ProviderVersion: settings.ProviderVersion,
-		Tags:                       []string{settings.ConsumerTag},
+		//Tags:                       []string{settings.ConsumerTag},
 		PactURLs:                   []string{"https://kadirdenz.pactflow.io/pacts/provider/TodoBackend/consumer/TodoFrontend/version/1.0.0"},
 		PublishVerificationResults: true,
 		FailIfNoPactsFound:         true,
 		BrokerURL:                  settings.BrokerBaseURL,
 		BrokerUsername:             settings.BrokerUsername,
-		BrokerToken: 			  settings.BrokerToken,
+		BrokerToken:                settings.BrokerToken,
 	}
 
 	verifyResponses, err := pact.VerifyProvider(t, verifyRequest)
