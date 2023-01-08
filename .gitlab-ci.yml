@@ -10,7 +10,7 @@ test:
   stage: test
   image: golang:1.18-alpine
   script:
-    - CGO_ENABLED=0 go test go test $(go list ./... | grep -v /pact)
+    - CGO_ENABLED=0 go test $(go list ./... | grep -v /pact)
 
 #dockerize and push to gitlab registry
 dockerize:
@@ -53,11 +53,11 @@ verify_pact:
       --provider-base-url https://$HEROKU_APP_NAME-test.herokuapp.com \
       --provider TodoBackend \
       --pacticipant TodoBackend \
-      --broker-base-url $PACT_BROKER_URL \
-      --broker-username $PACT_BROKER_USERNAME \
-      --broker-password $PACT_BROKER_PASSWORD \
       --provider-app-version 1.0.0 \
-      --provider-tags main
+      --provider-tags main \
+      --broker-base-url=$PACT_FLOW_BASE_URL \
+      --broker-token=$PACT_FLOW_API_KEY
+
 
 # pact can i deploy to prod
 can_i_deploy:
