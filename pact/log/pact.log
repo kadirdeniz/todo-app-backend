@@ -1,15 +1,11 @@
-I, [2023-01-07T21:49:15.124813 #51744]  INFO -- : Running example 'Verifying a pact between TodoFrontend and TodoBackend Given create todo a request for create todo with POST /todo returns a response which has status code 200'
-I, [2023-01-07T21:49:15.125202 #51744]  INFO -- : Sending POST request to path: "/todo" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type", "X_PACT_PROVIDER_STATES"=>[{"name"=>"create todo"}]}, see debug logs for body
-D, [2023-01-07T21:49:15.125222 #51744] DEBUG -- : body :{"text":"buy some milk"}
-I, [2023-01-07T21:49:15.135874 #51744]  INFO -- : Received response with status: 404, headers: {"Content-Length"=>"17", "Content-Type"=>"text/plain; charset=utf-8", "Date"=>"Sat, 07 Jan 2023 18:49:15 GMT"}, see debug logs for body
-D, [2023-01-07T21:49:15.135915 #51744] DEBUG -- : body: Cannot POST /todo
-I, [2023-01-07T21:53:40.521786 #52387]  INFO -- : Running example 'Verifying a pact between TodoFrontend and TodoBackend Given create todo a request for create todo with POST /todo returns a response which has status code 200'
-I, [2023-01-07T21:53:40.522163 #52387]  INFO -- : Sending POST request to path: "/todo" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type", "X_PACT_PROVIDER_STATES"=>[{"name"=>"create todo"}]}, see debug logs for body
-D, [2023-01-07T21:53:40.522183 #52387] DEBUG -- : body :{"text":"buy some milk"}
-I, [2023-01-07T21:53:40.533073 #52387]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"68", "Content-Type"=>"application/json", "Date"=>"Sat, 07 Jan 2023 18:53:40 GMT"}, see debug logs for body
-D, [2023-01-07T21:53:40.533134 #52387] DEBUG -- : body: {"id":"540ffab7-129e-4247-b0d9-093da711cfd0","text":"buy some milk"}
-I, [2023-01-08T00:03:39.413312 #64962]  INFO -- : Running example 'Verifying a pact between TodoFrontend and TodoBackend Given create todo a request for create todo with POST /todo returns a response which has status code 200'
-I, [2023-01-08T00:03:39.413536 #64962]  INFO -- : Sending POST request to path: "/todo" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type", "X_PACT_PROVIDER_STATES"=>[{"name"=>"create todo"}]}, see debug logs for body
-D, [2023-01-08T00:03:39.413556 #64962] DEBUG -- : body :{"text":"buy some milk"}
-I, [2023-01-08T00:03:39.423628 #64962]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"68", "Content-Type"=>"application/json", "Date"=>"Sat, 07 Jan 2023 21:03:39 GMT"}, see debug logs for body
-D, [2023-01-08T00:03:39.423664 #64962] DEBUG -- : body: {"id":"f03b936c-b824-4c74-b2a7-78da2c707eb8","text":"buy some milk"}
+# Logfile created on 2023-01-08 21:11:24 +0300 by logger.rb/66358
+I, [2023-01-08T21:16:57.123639 #25009]  INFO -- : Running example 'Verifying a pact between TodoFrontend and TodoBackend Given create todo a request for create todo with POST /todos returns a response which has status code 200'
+I, [2023-01-08T21:16:57.123936 #25009]  INFO -- : Sending POST request to path: "/todos" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type", "X_PACT_PROVIDER_STATES"=>[{"name"=>"create todo"}]}, see debug logs for body
+D, [2023-01-08T21:16:57.123962 #25009] DEBUG -- : body :{"text":"buy some milk"}
+I, [2023-01-08T21:16:57.134640 #25009]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"68", "Content-Type"=>"application/json", "Date"=>"Sun, 08 Jan 2023 18:16:57 GMT"}, see debug logs for body
+D, [2023-01-08T21:16:57.134676 #25009] DEBUG -- : body: {"id":"2e8885b5-8393-4a70-b034-777489c1c43d","text":"buy some milk"}
+I, [2023-01-08T21:17:00.472914 #25009]  INFO -- : Running example 'Verifying a pact between TodoFrontend and TodoBackend Given create todo a request for create todo with POST /todos returns a response which has status code 200'
+I, [2023-01-08T21:17:00.473286 #25009]  INFO -- : Sending POST request to path: "/todos" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type", "X_PACT_PROVIDER_STATES"=>[{"name"=>"create todo"}]}, see debug logs for body
+D, [2023-01-08T21:17:00.473334 #25009] DEBUG -- : body :{"text":"buy some milk"}
+I, [2023-01-08T21:17:00.476656 #25009]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"68", "Content-Type"=>"application/json", "Date"=>"Sun, 08 Jan 2023 18:17:00 GMT"}, see debug logs for body
+D, [2023-01-08T21:17:00.476713 #25009] DEBUG -- : body: {"id":"0ed1341c-32d6-4c45-ad2a-59a6c45a4f2b","text":"buy some milk"}

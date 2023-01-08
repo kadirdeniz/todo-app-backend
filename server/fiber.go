@@ -2,11 +2,12 @@ package server
 
 import (
 	"fmt"
-	"github.com/gofiber/fiber/v2"
 	"log"
 	"todo/handler"
 	"todo/repository"
 	"todo/service"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func Router() {
@@ -27,7 +28,7 @@ func StartServer(port int) error {
 		),
 	)
 
-	app.Post("/todo", handler.CreateTodo)
+	app.Post("/todos", handler.CreateTodo)
 
 	return app.Listen(fmt.Sprintf(":%d", port))
 }

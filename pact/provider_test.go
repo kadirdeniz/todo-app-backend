@@ -52,7 +52,7 @@ func TestProvider(t *testing.T) {
 	verifyRequest := types.VerifyRequest{
 		ProviderBaseURL: fmt.Sprintf("http://%s:%d", settings.Host, port),
 		ProviderVersion: settings.ProviderVersion,
-		// Tags:                       []string{settings.ConsumerTag},
+		Tags:                       []string{settings.ConsumerTag},
 		PactURLs:                   []string{"https://kadirdenz.pactflow.io/pacts/provider/TodoBackend/consumer/TodoFrontend/version/1.0.0"},
 		PublishVerificationResults: true,
 		FailIfNoPactsFound:         true,
