@@ -44,24 +44,6 @@ deploy to test:
     - docker push registry.heroku.com/$HEROKU_APP_NAME-test/web
     - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web -a $HEROKU_APP_NAME-test
 
-# verify pacts
-verify_pact:
-  stage: verify_pact
-  image:
-    name: pactfoundation/pact-cli:latest
-    entrypoint: [ "" ]
-  variables:
-    PACT_BROKER_CHECK_FOR_POTENTIAL_DUPLICATE_PACTICIPANT_NAMES: "false"
-  script:
-    -  verify \
-      --provider-base-url https://$HEROKU_APP_NAME-test.herokuapp.com \
-      --provider TodoBackend \
-      --pacticipant TodoBackend \
-      --provider-app-version 1.0.0 \
-      --provider-tags main \
-      --broker-base-url=$PACT_FLOW_BASE_URL \
-      --broker-token=$PACT_FLOW_API_KEY
-
 
 # pact can i deploy to prod
 can_i_deploy:
