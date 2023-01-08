@@ -15,8 +15,7 @@ test:
   before_script:
     - apt-get install -y ruby ruby-dev build-essential
   script:
-    - go test -v ./...
-    - CGO_ENABLED=0 go test $(go list ./... | grep -v /pact)
+    - CGO_ENABLED=0 go test -v ./...
 
 #dockerize and push to gitlab registry
 dockerize:
